@@ -8,7 +8,10 @@ import React, { useState } from "react";
 
 export default function Header() {
     const [activeTab, setActiveTab] = useState('Stays'); // State to toggle between Stays and Experiences
-
+    const [ProfileToggle, setProfileToggle] = useState(false)
+    const handleToggle = () => {
+        setProfileToggle(!ProfileToggle);
+    };
     return (
         <>
             <header className="grid max-sm:hidden">
@@ -43,71 +46,76 @@ export default function Header() {
                         <div className="text-xl font-medium">
                             <CiGlobe />
                         </div>
-                        <button className="flex flex-row text-3xl gap-3 border rounded-full hover:shadow-lg px-5 py-3">
+                        <button onClick={handleToggle} className="relative flex flex-row text-3xl gap-3 border rounded-full hover:shadow-lg px-5 py-3">
                             <IoReorderThreeOutline />
-                            <FaUserCircle />
+                            <FaUserCircle className="text-gray-500" />
                         </button>
+
                     </div>
+
+                    {/* Dropdown Menu */}
+                    {ProfileToggle && (
+                        <div className="absolute text-gray-600 right-10 mt-72 font-medium w-48 bg-white rounded-md shadow-lg p-2">
+                            <div className="p-2 hover:bg-gray-100 rounded-md cursor-pointer">
+                                SignUp
+                            </div>
+                            <div className="p-2 hover:bg-gray-100 rounded-md cursor-pointer">
+                                Login
+                            </div>
+                            <hr />
+                            <div>
+                            <div className="p-2 hover:bg-gray-100 rounded-md cursor-pointer">
+                                Airbnb Your Home
+                            </div>
+                            <div className="p-2 hover:bg-gray-100 rounded-md cursor-pointer">
+                                Host an Experience
+                            </div>
+                            <div className="p-2 hover:bg-gray-100 rounded-md cursor-pointer">
+                                Help Centre
+                            </div>
+                            </div>
+                        </div>
+                    )}
                 </div>
 
                 {/* Search Section */}
                 <div className="flex justify-center py-5">
-                    {activeTab === 'Stays' && (
-                        <div className="rounded-full border w-auto flex shadow-md">
-                            {/* Stays Search */}
-                            <div className="flex flex-col rounded-full hover:bg-gray-100 py-2 px-8">
-                                <label htmlFor="">Where</label>
-                                <input
-                                    type="text"
-                                    placeholder="Search destinations"
-                                    className="outline-none bg-transparent hover:bg-gray-100"
-                                />
-                            </div>
-                            <div className="flex flex-col rounded-full hover:bg-gray-100 py-2 px-4">
-                                <label htmlFor="">Check in</label>
-                                <input
-                                    type="text"
-                                    placeholder="Add Dates"
-                                    className="outline-none bg-transparent hover:bg-gray-100"
-                                />
-                            </div>
-                            <div className="flex flex-col rounded-full hover:bg-gray-100 py-2 px-4">
-                                <label htmlFor="">Check out</label>
-                                <input
-                                    type="text"
-                                    placeholder="Add Dates"
-                                    className="outline-none bg-transparent hover:bg-gray-100"
-                                />
-                            </div>
-                            <div className="flex flex-col rounded-full hover:bg-gray-100 py-2 px-4">
-                                <label htmlFor="">Who</label>
-                                <input
-                                    type="text"
-                                    placeholder="Add Guests"
-                                    className="outline-none bg-transparent hover:bg-gray-100"
-                                />
-                            </div>
-                            <div className="flex w-16 items-center">
-                                <button className="rounded-full text-2xl bg-red-500 p-3">
-                                    <CiSearch className="text-white" />
-                                </button>
-                            </div>
+
+                    <div className="rounded-full justify-between border w-2/3 flex shadow-md">
+                        {/* Stays Search */}
+                        <div className="flex flex-col rounded-full hover:bg-gray-100 py-2 px-8">
+                            <label htmlFor="">Where</label>
+                            <input
+                                type="text"
+                                placeholder="Search destinations"
+                                className="outline-none bg-transparent hover:bg-gray-100"
+                            />
                         </div>
-                    )}
+                        {/* Stays */}
+                        {activeTab === 'Stays' && (
+                            <div className="flex flex-row">
+                                <div className="flex flex-col rounded-full hover:bg-gray-100 py-2 px-4">
+                                    <label htmlFor="">Check in</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Add Dates"
+                                        className="outline-none bg-transparent hover:bg-gray-100"
+                                    />
+                                </div>
+                                <div className="flex flex-col rounded-full hover:bg-gray-100 py-2 px-4">
+                                    <label htmlFor="">Check out</label>
+                                    <input
+                                        type="text"
+                                        placeholder="Add Dates"
+                                        className="outline-none bg-transparent hover:bg-gray-100"
+                                    />
+                                </div>
+                            </div>
+                        )}
 
                         {/* Experiences */}
-                    {activeTab === 'Experiences' && (
-                        <div className="rounded-full border w-auto flex shadow-md">
-                            {/* Experiences Search */}
-                            <div className="flex flex-col rounded-full hover:bg-gray-100 py-2 px-8">
-                                <label htmlFor="">Where</label>
-                                <input
-                                    type="text"
-                                    placeholder="Search destinations"
-                                    className="outline-none bg-transparent hover:bg-gray-100"
-                                />
-                            </div>
-                            <div className="flex flex-col rounded-full hover:bg-gray-100 py-2 px-32 ">
+                        {activeTab === 'Experiences' && (
+                            <div className="flex flex-col rounded-full hover:bg-gray-100 py-2 px-20">
                                 <label htmlFor="">Date</label>
                                 <input
                                     type="text"
@@ -115,7 +123,9 @@ export default function Header() {
                                     className="outline-none bg-transparent hover:bg-gray-100"
                                 />
                             </div>
-                            <div className="flex flex-col rounded-full hover:bg-gray-100 py-2 px-4">
+                        )}
+                        <div className="flex flex-row">
+                            <div className="flex flex-col rounded-full hover:bg-gray-100 py-2 px-10">
                                 <label htmlFor="">Who</label>
                                 <input
                                     type="text"
@@ -129,7 +139,10 @@ export default function Header() {
                                 </button>
                             </div>
                         </div>
-                    )}
+                    </div>
+
+
+
                 </div>
 
                 <hr />

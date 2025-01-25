@@ -25,7 +25,7 @@ export default function Cards() {
     return (
         <div className="mx-4 md:mx-20 py-8">
             {/* Grid Layout for Cards */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                 {
                     Data.map((data, index) => (
                         <div key={index} className="rounded-md p-4">
